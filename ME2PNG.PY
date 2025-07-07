@@ -898,8 +898,12 @@ while john <= i:
     if do_warps:
         warps = re.search(r'(?<="MARKERS": {)(.*?)(?=\})',file_me).group()
         warps = re.sub(r' "([^,]+),([^"]+)": "(.*?)"',draw_warps,warps)
-        if submods.endswith(','): # because mods is not suppported, there will be no mods that follow submods
+        if submods.endswith(','):
             submods = submods[:-1]
+        if not warps.endswith(','):
+            warps += ','
+        warps += submods
+        submods = ''
     elif submods.endswith(','):
         submods = submods[:-1]
         warps = submods
